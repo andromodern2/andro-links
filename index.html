@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDRO</title>
+<meta name="description" content="ANDRO — graphic designer & AI creator from Iraq. All my Telegram channels and links in one place.">
+<meta property="og:title" content="ANDRO">
+<meta property="og:description" content="Graphic designer & AI creator from Iraq — all my channels in one place.">
+<meta property="og:image" content="/photo.jpg">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#03110f">
+<link rel="icon" href="/photo.jpg">
+<link rel="apple-touch-icon" href="/photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* palette sampled from the photo */
+    --bg:#03110f;
+    --card:rgba(230,225,214,.045);
+    --card-hi:rgba(230,225,214,.085);
+    --line:rgba(230,225,214,.11);
+    --txt:#e9ece6;
+    --dim:#8fa8a1;
+    --acc:#199e8e;
+    --acc2:#5eead4;
+    --deep:#023b3b;
+    --cream:#e6e1d6;
+    --warn:#fbbf24;
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk','Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+  html[dir="rtl"] body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif}
+
+  .glow{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .glow::before,.glow::after{content:'';position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+  .glow::before{width:60vw;height:60vw;max-width:680px;max-height:680px;background:radial-gradient(circle,#0f7a72 0%,transparent 70%);top:-18vw;left:-10vw}
+  .glow::after{width:50vw;height:50vw;max-width:560px;max-height:560px;background:radial-gradient(circle,#023b3b 0%,transparent 70%);bottom:-14vw;right:-10vw;opacity:.55}
+
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 6vw 90px}
+
+  .langbar{display:flex;justify-content:flex-end;padding:26px 0 0}
+  .seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px;backdrop-filter:blur(12px)}
+  .seg button{font:inherit;font-size:13px;font-weight:600;background:none;border:0;color:var(--dim);padding:7px 16px;border-radius:999px;cursor:pointer;transition:.22s}
+  .seg button.on{background:linear-gradient(135deg,var(--acc),#0d6b63);color:#fff;box-shadow:0 4px 16px rgba(25,158,142,.4)}
+  .seg button:not(.on):hover{color:var(--txt)}
+
+  header{text-align:center;padding:52px 0 8px}
+  .ava{width:150px;height:150px;margin:0 auto 26px;border-radius:22px;background:var(--deep);position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(94,234,212,.22),0 16px 44px -14px rgba(2,59,59,.9)}
+  .ava img{width:100%;height:100%;object-fit:contain;border-radius:22px;display:block}
+  h1{font-size:clamp(40px,10vw,62px);font-weight:700;letter-spacing:-.02em;line-height:1}
+  h1 span{background:linear-gradient(120deg,var(--cream) 15%,var(--acc2) 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tag{color:var(--dim);font-size:clamp(14px,3.6vw,17px);margin-top:14px;line-height:1.6}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+  .chip{font-size:12.5px;font-weight:500;color:#cfd8d3;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;backdrop-filter:blur(10px)}
+  .chip b{color:var(--acc2);font-weight:600}
+
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-size:14.5px;font-weight:600;padding:13px 22px;border-radius:999px;transition:.22s;border:0;cursor:pointer;font-family:inherit}
+  .btn-p{background:linear-gradient(135deg,#1cae9c,#0c655e);color:#f2fbf9;box-shadow:0 10px 30px -8px rgba(25,158,142,.6)}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(25,158,142,.8)}
+  .btn-s{background:var(--card);color:var(--txt);border:1px solid var(--line)}
+  .btn-s:hover{background:var(--card-hi);transform:translateY(-2px)}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+  .btn svg{width:17px;height:17px;flex:none;fill:currentColor}
+
+  section{margin-top:64px}
+  .shead{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .shead h2{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+  html[dir="rtl"] .shead h2{letter-spacing:0}
+  .shead .rule{height:1px;flex:1;background:linear-gradient(90deg,var(--line),transparent)}
+  html[dir="rtl"] .shead .rule{background:linear-gradient(270deg,var(--line),transparent)}
+
+  .grid{display:grid;gap:12px}
+  .card{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:17px 19px;transition:.24s;position:relative;overflow:hidden;backdrop-filter:blur(14px)}
+  .card::before{content:'';position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc2),var(--acc));opacity:0;transition:.24s}
+  .card:hover{background:var(--card-hi);border-color:rgba(94,234,212,.38);transform:translateY(-3px)}
+  .card:hover::before{opacity:1}
+  .ic{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;background:rgba(63,208,189,.11);border:1px solid rgba(63,208,189,.22)}
+  .ic svg{width:23px;height:23px;fill:#3fd0bd}
+  .ic.g{background:rgba(25,158,142,.16);border-color:rgba(25,158,142,.3)}
+  .ic.g svg{fill:var(--acc2)}
+  .ic.y{background:rgba(230,225,214,.1);border-color:rgba(230,225,214,.2)}
+  .ic.y svg{fill:var(--cream)}
+  .cbody{flex:1;min-width:0}
+  .cname{font-size:16.5px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);background:rgba(94,234,212,.11);border:1px solid rgba(94,234,212,.24);padding:3px 7px;border-radius:6px}
+  .badge.adm{color:var(--cream);background:rgba(230,225,214,.1);border-color:rgba(230,225,214,.22)}
+  .chandle{font-size:13px;color:var(--dim);margin-top:4px;font-family:'Inter',sans-serif;direction:ltr;unicode-bidi:embed}
+  html[dir="rtl"] .chandle{text-align:right}
+  .arrow{flex:none;color:var(--dim);font-size:19px;transition:.24s}
+  html[dir="rtl"] .arrow{transform:scaleX(-1)}
+  .card:hover .arrow{color:var(--acc2)}
+
+  footer{margin-top:70px;text-align:center;color:var(--dim);font-size:13px;line-height:1.9}
+  footer .dot{color:var(--acc);margin:0 8px}
+  #ownerDot{cursor:pointer;padding:0 4px;-webkit-tap-highlight-color:transparent;user-select:none}
+
+  .rv{opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1;transform:none}
+
+  #ownerFab{position:fixed;inset-inline-end:18px;bottom:18px;z-index:60;display:none;align-items:center;gap:9px;padding:13px 20px;border-radius:999px;border:0;cursor:pointer;font:600 14.5px 'Space Grotesk',sans-serif;color:#04201d;background:linear-gradient(135deg,#5eead4,#199e8e);box-shadow:0 12px 34px -8px rgba(25,158,142,.75)}
+  #ownerFab.show{display:inline-flex}
+  #ownerFab:hover{transform:translateY(-2px)}
+  #ownerFab svg{width:17px;height:17px;fill:#04201d}
+  #fabDot{width:9px;height:9px;border-radius:50%;background:#7f1d1d;display:none}
+  #fabDot.on{display:block}
+
+  .ovl{position:fixed;inset:0;z-index:70;background:rgba(2,14,12,.72);backdrop-filter:blur(7px);display:none;overflow-y:auto;padding:20px 0}
+  .ovl.open{display:block}
+  .panel{max-width:660px;margin:0 auto;background:#071b19;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 30px 90px -20px #000}
+  .ptop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .ptop h3{font-size:20px;font-weight:700}
+  .psub{color:var(--dim);font-size:13px;line-height:1.6;margin-bottom:18px}
+  .x{background:var(--card);border:1px solid var(--line);color:var(--txt);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:17px;flex:none}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tabs button{font:600 13px 'Space Grotesk',sans-serif;background:var(--card);border:1px solid var(--line);color:var(--dim);padding:9px 15px;border-radius:999px;cursor:pointer}
+  .tabs button.on{background:rgba(94,234,212,.14);border-color:rgba(94,234,212,.34);color:var(--acc2)}
+  .pane{display:none}.pane.on{display:block}
+
+  .fld{margin-bottom:14px}
+  .fld label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+  .fld input,.fld select,.fld textarea{width:100%;background:rgba(2,20,18,.7);border:1px solid var(--line);border-radius:12px;color:var(--txt);font:400 15px 'Inter',sans-serif;padding:12px 14px}
+  .fld textarea{min-height:78px;resize:vertical;line-height:1.5}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{outline:0;border-color:rgba(94,234,212,.5)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.two{grid-template-columns:1fr}}
+
+  .row{display:flex;align-items:center;gap:11px;background:rgba(2,20,18,.55);border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:9px}
+  .row .rn{flex:1;min-width:0}
+  .row .rn b{display:block;font-size:14.5px;font-weight:600}
+  .row .rn small{color:var(--dim);font-size:12px;font-family:'Inter',sans-serif;direction:ltr;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mini{background:var(--card);border:1px solid var(--line);color:var(--dim);width:31px;height:31px;border-radius:9px;cursor:pointer;font-size:13px;flex:none;font-family:inherit}
+  .mini:hover{color:var(--acc2);border-color:rgba(94,234,212,.35)}
+  .mini.del:hover{color:#ff8b7d;border-color:rgba(255,139,125,.4)}
+  .addbtn{width:100%;background:rgba(94,234,212,.1);border:1px dashed rgba(94,234,212,.35);color:var(--acc2);padding:12px;border-radius:13px;cursor:pointer;font:600 14px 'Space Grotesk',sans-serif;margin-top:4px}
+  .pfoot{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+  .note{background:rgba(94,234,212,.07);border:1px solid rgba(94,234,212,.2);border-radius:13px;padding:13px 15px;font-size:13px;color:#bfe6df;line-height:1.65;margin-bottom:16px}
+  .note b{color:var(--acc2)}
+  .note.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.28);color:#f3ddaa}
+  .note.warn b{color:var(--warn)}
+  #codeOut{width:100%;min-height:120px;font:400 11px ui-monospace,monospace;background:rgba(2,20,18,.8);border:1px solid var(--line);border-radius:12px;color:var(--dim);padding:12px;margin-top:12px;display:none}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;z-index:90;background:#5eead4;color:#04201d;font:600 14px 'Space Grotesk',sans-serif;padding:12px 22px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);max-width:88vw;text-align:center}
+  .toast.show{opacity:1}
+  .toast.bad{background:#fca5a5}
+
+  @media(max-width:520px){
+    .ava{width:132px;height:132px}
+    .card{padding:15px 16px;gap:13px}
+    .ic{width:42px;height:42px}
+    .panel{border-radius:0;min-height:100vh}
+    .ovl{padding:0}
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+
+  <div class="langbar">
+    <div class="seg" role="group">
+      <button id="btn-en" class="on" onclick="setLang('en')">English</button>
+      <button id="btn-ar" onclick="setLang('ar')">العربية</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="ava" id="avatar"><img src="/photo.jpg" alt="Andro"></div>
+    <h1><span id="hName">ANDRO</span></h1>
+    <p class="tag" id="hTag"></p>
+    <div class="facts" id="hChips"></div>
+    <div class="cta" id="hCta"></div>
+  </header>
+
+  <div id="sections"></div>
+
+  <footer class="rv">
+    <div><strong style="color:var(--txt)" id="fName">ANDRO</strong><span class="dot" id="ownerDot">•</span><span id="fPlace"></span></div>
+    <div style="margin-top:6px;opacity:.7" id="fTrade"></div>
+  </footer>
+</div>
+
+<button id="ownerFab" onclick="openEditor()">
+  <span id="fabDot"></span>
+  <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+  <span id="fabTxt">Edit site</span>
+</button>
+
+<div class="ovl" id="ovl">
+  <div class="panel">
+    <div class="ptop">
+      <h3 id="edTitle">Site editor</h3>
+      <button class="x" onclick="closeEditor()">✕</button>
+    </div>
+    <p class="psub" id="edSub"></p>
+
+    <div class="tabs">
+      <button class="on" onclick="tab(0,this)" id="t0">Channels</button>
+      <button onclick="tab(1,this)" id="t1">About me</button>
+      <button onclick="tab(2,this)" id="t2">Publish</button>
+      <button onclick="tab(3,this)" id="t3">Security</button>
+    </div>
+
+    <div class="pane on" id="p0">
+      <div id="itemForm" style="display:none;background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.24);border-radius:16px;padding:16px;margin-bottom:16px">
+        <div class="fld"><label id="lbName">Name</label><input id="iName" placeholder="ANDRO"></div>
+        <div class="fld"><label id="lbNameAr">Name in Arabic (optional)</label><input id="iNameAr" dir="rtl" placeholder="اختياري"></div>
+        <div class="fld"><label id="lbUrl">Link</label><input id="iUrl" dir="ltr" inputmode="url" placeholder="https://t.me/..."></div>
+        <div class="fld"><label id="lbType">Type</label>
+          <select id="iType">
+            <option value="channel">📢 Channel</option>
+            <option value="group">👥 Group</option>
+            <option value="bot">🤖 Bot</option>
+            <option value="admin">⭐ Admin in</option>
+            <option value="youtube">▶ YouTube</option>
+            <option value="link">🔗 Other link</option>
+          </select>
+        </div>
+        <div class="fld"><label id="lbSect">Section</label><select id="iGroup"></select></div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-p" style="flex:1" onclick="itemSave()" id="bItemSave">Save</button>
+          <button class="btn btn-s" onclick="itemCancel()" id="bItemCancel">Cancel</button>
+        </div>
+      </div>
+      <div id="groupsEdit"></div>
+    </div>
+
+    <div class="pane" id="p1">
+      <div class="fld"><label id="lbMyName">Name</label><input id="fName_i"></div>
+      <div class="fld"><label id="lbTagEn">Tagline — English</label><textarea id="fTagEn"></textarea></div>
+      <div class="fld"><label id="lbTagAr">Tagline — العربية</label><textarea id="fTagAr" dir="rtl"></textarea></div>
+      <div class="fld"><label id="lbTags">Info tags</label><div id="chipsEdit"></div>
+        <div id="chipForm" style="display:none;background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.24);border-radius:16px;padding:16px;margin:10px 0">
+          <div class="two">
+            <div class="fld" style="margin:0"><label id="lbCl">Label</label><input id="cLab" placeholder="Age"></div>
+            <div class="fld" style="margin:0"><label id="lbCv">Value</label><input id="cVal" placeholder="20"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button class="btn btn-p" style="flex:1" onclick="chipSave()" id="bChipSave">Save</button>
+            <button class="btn btn-s" onclick="chipCancel()" id="bChipCancel">Cancel</button>
+          </div>
+        </div>
+        <button class="addbtn" onclick="addChip()" id="bAddChip">+ Add info tag</button></div>
+    </div>
+
+    <div class="pane" id="p2">
+      <div class="note" id="pubStatus"></div>
+      <button class="btn btn-p" style="width:100%" onclick="publishLive()" id="bPublish">🚀 Publish to the internet</button>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="btn btn-s" style="flex:1" onclick="downloadData()" id="bDl">⬇ Backup</button>
+        <button class="btn btn-s" style="flex:1" onclick="copyData()" id="bCopy">📋 Copy</button>
+      </div>
+      <textarea id="codeOut" readonly></textarea>
+    </div>
+
+    <div class="pane" id="p3">
+      <div class="note" id="secNote"></div>
+      <button class="btn btn-s" style="width:100%" onclick="lockDevice()" id="bLock">🔒 Hide edit button on this device</button>
+    </div>
+
+    <div class="pfoot">
+      <button class="btn btn-p" style="flex:1" onclick="saveAll()" id="bSave">Save changes</button>
+      <button class="btn btn-s" onclick="discardDraft()" id="bReset">Undo all</button>
+    </div>
+  </div>
+</div>
+
+<div class="ovl" id="pinOvl">
+  <div class="panel" style="max-width:380px;text-align:center;padding:30px 24px">
+    <h3 style="font-size:19px;font-weight:700;margin-bottom:8px" id="pinT">Owner access</h3>
+    <p style="color:var(--dim);font-size:13.5px;line-height:1.6;margin-bottom:18px" id="pinS"></p>
+    <input id="pinIn" type="password" inputmode="numeric" autocomplete="current-password"
+      style="width:100%;background:rgba(2,20,18,.7);border:1px solid var(--line);border-radius:12px;color:var(--txt);font:600 22px 'Inter',sans-serif;padding:14px;text-align:center;letter-spacing:.3em">
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-p" style="flex:1" onclick="pinSubmit()" id="bPinOk">Unlock</button>
+      <button class="btn btn-s" onclick="pinClose()" id="bPinNo">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* Fallback content, used only if data.json cannot be loaded
+   (for example when this file is opened directly from disk). */
+var EMBEDDED = {
+  name:"ANDRO",
+  tag:{en:"Graphic designer & AI creator from Iraq — content maker, channel owner, and a few other things.",
+       ar:"مصمم جرافيك وصانع محتوى من العراق — أعمل بالذكاء الاصطناعي باحترافية، وأدير قنواتي الخاصة."},
+  place:{en:"Iraq",ar:"العراق"},
+  trade:{en:"Graphics · AI · Content",ar:"جرافيك · ذكاء اصطناعي · محتوى"},
+  chips:[
+    {l:{en:"Location",ar:"الموقع"},v:{en:"Iraq",ar:"العراق"}},
+    {l:{en:"Age",ar:"العمر"},v:{en:"20",ar:"٢٠"}},
+    {l:{en:"Design",ar:"التصميم"},v:{en:"Graphics",ar:"جرافيك"}},
+    {l:{en:"AI",ar:"الذكاء الاصطناعي"},v:{en:"Professional workflow",ar:"بأسلوب احترافي"}},
+    {l:{en:"Content",ar:"المحتوى"},v:{en:"Creator",ar:"صانع محتوى"}}
+  ],
+  groups:[
+    {t:{en:"My channels",ar:"قنواتي"},items:[
+      {n:"ANDRO",type:"channel",url:"https://t.me/Andro_M3",h:"t.me/Andro_M3"},
+      {n:"ANDRO",type:"group",url:"https://t.me/ANDRO_M1",h:"t.me/ANDRO_M1"},
+      {n:"ANDRO Store",type:"bot",url:"https://t.me/ANDRO_SRTBOT",h:"@ANDRO_SRTBOT"}
+    ]},
+    {t:{en:"Admin in",ar:"مشرف في"},items:[
+      {n:"AMERICAN",type:"admin",url:"https://t.me/digitalplus01",h:"t.me/digitalplus01"},
+      {n:"BATMAN",type:"admin",url:"https://t.me/DarkKnightHub",h:"t.me/DarkKnightHub"}
+    ]},
+    {t:{en:"Find me",ar:"تواصل معي"},items:[
+      {n:"Personal Telegram",nAr:"تلغرام الشخصي",type:"channel",url:"https://t.me/P_S_N_2",h:"@P_S_N_2"},
+      {n:"ANDRO",type:"youtube",url:"https://www.youtube.com/@Andro-M",h:"youtube.com/@Andro-M"}
+    ]}
+  ]
+};
+
+var TYPES = {
+  channel:{cls:"",badge:{en:"Channel",ar:"قناة"}},
+  group:{cls:"g",badge:{en:"Group",ar:"مجموعة"}},
+  bot:{cls:"g",badge:{en:"Bot",ar:"بوت"}},
+  admin:{cls:"",badge:{en:"Admin",ar:"مشرف"},adm:true},
+  youtube:{cls:"y",badge:{en:"YouTube",ar:"يوتيوب"},adm:true},
+  link:{cls:"g",badge:{en:"Link",ar:"رابط"}}
+};
+var SVG = {
+  tg:'<path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.26-1.91.178-.184 3.247-2.977 3.307-3.23.007-.03.014-.14-.052-.198-.066-.058-.164-.038-.234-.023-.1.023-1.685 1.07-4.755 3.142-.45.31-.86.46-1.226.442-.404-.018-1.18-.238-1.758-.426-.708-.23-1.27-.352-1.223-.744.024-.203.303-.412.836-.626 3.27-1.425 5.45-2.365 6.54-2.82 3.114-1.298 3.76-1.523 4.18-1.53z"/>',
+  grp:'<path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58C.48 14.9 0 15.62 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85-.85-.37-1.79-.58-2.78-.58-.39 0-.76.04-1.13.1.4.68.63 1.46.63 2.29V18H24v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>',
+  bot:'<path d="M20 9V7a2 2 0 0 0-2-2h-3a3 3 0 0 0-6 0H6a2 2 0 0 0-2 2v2a3 3 0 0 0 0 6v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2a3 3 0 0 0 0-6zM9.5 14.5A1.5 1.5 0 1 1 11 13a1.5 1.5 0 0 1-1.5 1.5zm5 0A1.5 1.5 0 1 1 16 13a1.5 1.5 0 0 1-1.5 1.5z"/>',
+  yt:'<path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>',
+  lnk:'<path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 0-10z"/>'
+};
+function svgFor(t){ return t==='youtube'?SVG.yt : t==='group'?SVG.grp : t==='bot'?SVG.bot : t==='link'?SVG.lnk : SVG.tg; }
+
+var UI = {
+  fab:{en:"Edit site",ar:"تعديل الموقع"},
+  edT:{en:"Site editor",ar:"محرّر الموقع"},
+  edS:{en:"Only you can see this. Change anything, then hit Publish.",ar:"أنت فقط تراه. عدّل ما تريد ثم اضغط نشر."},
+  t:[{en:"Channels",ar:"القنوات"},{en:"About me",ar:"معلوماتي"},{en:"Publish",ar:"النشر"},{en:"Security",ar:"الحماية"}],
+  save:{en:"Save changes",ar:"حفظ التغييرات"},
+  reset:{en:"Undo all",ar:"إلغاء الكل"},
+  join:{en:"Join my channel",ar:"انضم إلى قناتي"},
+  msg:{en:"Message me",ar:"راسلني"},
+  clean:{en:"<b>Everything is published.</b> The site everyone sees matches what you have here.",
+         ar:"<b>كل شيء منشور.</b> ما يراه الزوار مطابق لما لديك هنا."},
+  dirty:{en:"<b>You have unpublished changes.</b> Tap Publish and they go live for everyone in about half a minute.",
+         ar:"<b>لديك تغييرات غير منشورة.</b> اضغط نشر وستظهر للجميع خلال نصف دقيقة تقريباً."},
+  noSrv:{en:"<b>No server here.</b> This copy can't publish by itself — use Copy and send it to Claude, or open your real site address.",
+         ar:"<b>لا يوجد سيرفر هنا.</b> هذه النسخة لا تنشر بنفسها — استخدم نسخ وأرسلها إلى Claude، أو افتح عنوان موقعك الحقيقي."},
+  sec:{en:"The edit button stays hidden until the PIN is entered, and your PIN is checked on the server — it is never stored in the site's code. To change it, edit EDIT_PIN in your Vercel settings.",
+       ar:"زر التعديل يبقى مخفياً حتى إدخال الرمز، ويتم التحقق من الرمز على السيرفر — لا يُخزَّن أبداً في كود الموقع. لتغييره، عدّل EDIT_PIN في إعدادات Vercel."},
+  savedT:{en:"Saved ✓",ar:"تم الحفظ ✓"},
+  copiedT:{en:"Copied ✓",ar:"تم النسخ ✓"},
+  pubOk:{en:"Published! Live in ~30 seconds 🚀",ar:"تم النشر! سيظهر خلال ٣٠ ثانية 🚀"},
+  pubbing:{en:"Publishing…",ar:"جارٍ النشر…"},
+  badPin:{en:"Wrong PIN",ar:"رمز خاطئ"},
+  checking:{en:"Checking…",ar:"جارٍ التحقق…"},
+  addI:{en:"+ Add channel / link",ar:"+ إضافة قناة أو رابط"},
+  addChip:{en:"+ Add info tag",ar:"+ إضافة وسم"},
+  confirmDel:{en:"Delete this?",ar:"حذف هذا؟"},
+  confirmReset:{en:"Throw away your unpublished changes?",ar:"إلغاء التغييرات غير المنشورة؟"},
+  lbName:{en:"Name",ar:"الاسم"},
+  lbNameAr:{en:"Name in Arabic (optional)",ar:"الاسم بالعربي (اختياري)"},
+  lbUrl:{en:"Link",ar:"الرابط"},
+  lbType:{en:"Type",ar:"النوع"},
+  lbSect:{en:"Section",ar:"القسم"},
+  lbMyName:{en:"Name",ar:"الاسم"},
+  lbTagEn:{en:"Tagline — English",ar:"الوصف — إنجليزي"},
+  lbTagAr:{en:"Tagline — العربية",ar:"الوصف — عربي"},
+  lbTags:{en:"Info tags",ar:"وسوم المعلومات"},
+  lbCl:{en:"Label",ar:"العنوان"},
+  lbCv:{en:"Value",ar:"القيمة"},
+  ok:{en:"Save",ar:"حفظ"},
+  cancel:{en:"Cancel",ar:"إلغاء"},
+  pinT:{en:"Owner access",ar:"دخول المالك"},
+  pinS:{en:"Enter your PIN to unlock the editor.",ar:"أدخل رمزك السري لفتح المحرّر."},
+  unlock:{en:"Unlock",ar:"فتح"},
+  publish:{en:"🚀 Publish to the internet",ar:"🚀 انشر على الإنترنت"},
+  lock:{en:"🔒 Hide edit button on this device",ar:"🔒 إخفاء زر التعديل على هذا الجهاز"}
+};
+
+/* ---------- state ---------- */
+var LANG='en', D=null, REMOTE=null, SESSION_PIN=null, CAN_PUBLISH=false, NO_SERVER=false;
+var STORAGE_OK=(function(){try{localStorage.setItem('a_t','1');var v=localStorage.getItem('a_t')==='1';localStorage.removeItem('a_t');return v;}catch(e){return false;}})();
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function T(o){ return (o && (o[LANG]||o.en))||''; }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function safeUrl(u){
+  u=String(u||'').trim(); if(!u) return '';
+  /* reject dangerous schemes BEFORE adding https://, otherwise
+     "javascript:..." would silently become "https://javascript:..." */
+  if(/^[a-z][a-z0-9+.-]*:/i.test(u) && !/^https?:\/\//i.test(u)) return '';
+  if(!/^https?:\/\//i.test(u)) u='https://'+u.replace(/^\/+/,'');
+  return u;
+}
+function readDraft(){ try{ var s=localStorage.getItem('andro_draft'); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function saveDraft(){ try{ localStorage.setItem('andro_draft', JSON.stringify(D)); }catch(e){} }
+function clearDraft(){ try{ localStorage.removeItem('andro_draft'); }catch(e){} }
+function isDirty(){ return REMOTE && JSON.stringify(D)!==JSON.stringify(REMOTE); }
+
+var OWNER_MEM=false;
+function cookieHas(){ try{ return /(?:^|;\s*)andro_owner=1(?:;|$)/.test(document.cookie); }catch(e){ return false; } }
+function isOwner(){
+  if(OWNER_MEM) return true;
+  try{ if(localStorage.getItem('andro_owner')==='1'){OWNER_MEM=true;return true;} }catch(e){}
+  if(cookieHas()){ OWNER_MEM=true; return true; }
+  return false;
+}
+function setOwner(on){
+  OWNER_MEM=!!on;
+  try{ on?localStorage.setItem('andro_owner','1'):localStorage.removeItem('andro_owner'); }catch(e){}
+  try{ document.cookie='andro_owner='+(on?'1':'0')+';path=/;max-age='+(on?31536000:0)+';samesite=lax'; }catch(e){}
+  if(!on){ SESSION_PIN=null; try{ sessionStorage.removeItem('andro_pin'); }catch(e){} }
+}
+function rememberPin(p){ SESSION_PIN=p; try{ sessionStorage.setItem('andro_pin',p); }catch(e){} }
+function recallPin(){ if(SESSION_PIN) return SESSION_PIN; try{ return sessionStorage.getItem('andro_pin'); }catch(e){ return null; } }
+
+/* ---------- render ---------- */
+function render(){
+  document.getElementById('hName').textContent = D.name;
+  document.getElementById('fName').textContent = D.name;
+  document.getElementById('hTag').textContent = T(D.tag);
+  document.getElementById('fPlace').textContent = T(D.place);
+  document.getElementById('fTrade').textContent = T(D.trade);
+  document.title = D.name;
+
+  document.getElementById('hChips').innerHTML = (D.chips||[]).map(function(c){
+    return '<span class="chip"><b>'+esc(T(c.l))+'</b> · <span>'+esc(T(c.v))+'</span></span>';
+  }).join('');
+
+  var first=(D.groups[0]&&D.groups[0].items[0])||null, pm=null;
+  (D.groups||[]).forEach(function(g){(g.items||[]).forEach(function(i){ if(/P_S_N|personal/i.test(i.url+' '+i.n)&&!pm) pm=i; });});
+  var cta='';
+  if(first) cta+='<a class="btn btn-p" href="'+esc(safeUrl(first.url))+'" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24">'+SVG.tg+'</svg><span>'+esc(T(UI.join))+'</span></a>';
+  if(pm) cta+='<a class="btn btn-s" href="'+esc(safeUrl(pm.url))+'" target="_blank" rel="noopener noreferrer"><span>'+esc(T(UI.msg))+'</span></a>';
+  document.getElementById('hCta').innerHTML=cta;
+
+  var html='';
+  (D.groups||[]).forEach(function(g){
+    if(!g.items||!g.items.length) return;
+    html+='<section class="rv"><div class="shead"><h2>'+esc(T(g.t))+'</h2><div class="rule"></div></div><div class="grid">';
+    g.items.forEach(function(i){
+      var ty=TYPES[i.type]||TYPES.channel;
+      var nm=(LANG==='ar'&&i.nAr)?i.nAr:i.n;
+      html+='<a class="card" href="'+esc(safeUrl(i.url))+'" target="_blank" rel="noopener noreferrer">'
+        +'<div class="ic '+ty.cls+'"><svg viewBox="0 0 24 24">'+svgFor(i.type)+'</svg></div>'
+        +'<div class="cbody"><div class="cname">'+esc(nm)
+        +'<span class="badge'+(ty.adm?' adm':'')+'">'+esc(T(ty.badge))+'</span></div>'
+        +'<div class="chandle">'+esc(i.h||'')+'</div></div><span class="arrow">→</span></a>';
+    });
+    html+='</div></section>';
+  });
+  document.getElementById('sections').innerHTML=html;
+  reveal();
+}
+function reveal(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');}); return;
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el,i){ el.style.transitionDelay=(i*70)+'ms'; io.observe(el); });
+}
+function setLang(l){
+  LANG=(l==='ar')?'ar':'en';
+  document.documentElement.lang=LANG;
+  document.documentElement.dir=(LANG==='ar')?'rtl':'ltr';
+  document.getElementById('btn-ar').classList.toggle('on',LANG==='ar');
+  document.getElementById('btn-en').classList.toggle('on',LANG!=='ar');
+  try{ localStorage.setItem('andro_lang',LANG); }catch(e){}
+  render(); syncUI();
+}
+function syncUI(){
+  var set=function(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; };
+  set('fabTxt',T(UI.fab)); set('edTitle',T(UI.edT)); set('edSub',T(UI.edS));
+  for(var i=0;i<4;i++) set('t'+i,T(UI.t[i]));
+  set('bSave',T(UI.save)); set('bReset',T(UI.reset));
+  ['lbName','lbNameAr','lbUrl','lbType','lbSect','lbMyName','lbTagEn','lbTagAr','lbTags','lbCl','lbCv','pinT','pinS']
+    .forEach(function(k){ set(k,T(UI[k])); });
+  set('bItemSave',T(UI.ok)); set('bItemCancel',T(UI.cancel));
+  set('bChipSave',T(UI.ok)); set('bChipCancel',T(UI.cancel));
+  set('bAddChip',T(UI.addChip)); set('bPinOk',T(UI.unlock)); set('bPinNo',T(UI.cancel));
+  set('bPublish',T(UI.publish)); set('bLock',T(UI.lock));
+  document.getElementById('secNote').innerHTML=T(UI.sec);
+  updateDirty();
+}
+function updateDirty(){
+  var dirty=isDirty();
+  var note=document.getElementById('pubStatus');
+  note.className='note'+(dirty?' warn':'');
+  note.innerHTML = NO_SERVER ? T(UI.noSrv) : (dirty ? T(UI.dirty) : T(UI.clean));
+  document.getElementById('bPublish').disabled = NO_SERVER || !dirty;
+  document.getElementById('fabDot').classList.toggle('on', dirty);
+}
+
+/* ---------- server ---------- */
+function api(path,payload){
+  return fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){ return r.json().then(function(j){ j._status=r.status; return j; })
+                        .catch(function(){ return {ok:false,error:'Bad server reply',_status:r.status}; }); })
+    .catch(function(){ return {ok:false,_offline:true}; });
+}
+
+/* ---------- unlock ---------- */
+function showFab(){ document.getElementById('ownerFab').classList.toggle('show', isOwner()); }
+function tryUnlock(){
+  document.getElementById('pinIn').value='';
+  document.getElementById('pinOvl').classList.add('open');
+  setTimeout(function(){ try{document.getElementById('pinIn').focus();}catch(e){} },120);
+}
+function pinClose(){ document.getElementById('pinOvl').classList.remove('open'); }
+function pinSubmit(){
+  var p=document.getElementById('pinIn').value.trim();
+  if(!p) return;
+  var btn=document.getElementById('bPinOk');
+  btn.disabled=true; btn.textContent=T(UI.checking);
+  api('/api/verify',{pin:p}).then(function(r){
+    btn.disabled=false; btn.textContent=T(UI.unlock);
+    if(r.ok){
+      rememberPin(p); CAN_PUBLISH=!!r.canPublish; NO_SERVER=false;
+      setOwner(true); pinClose(); showFab(); openEditor(); updateDirty();
+    } else if(r._offline || r.notConfigured){
+      /* No working server: let the editor open anyway so the site is still
+         usable, but publishing is off. Nothing secret is exposed by this. */
+      NO_SERVER=true; setOwner(true); pinClose(); showFab(); openEditor(); updateDirty();
+      if(r.notConfigured) toast(r.error||'Server not set up', true);
+    } else {
+      document.getElementById('pinIn').value='';
+      toast(r.error||T(UI.badPin), true);
+    }
+  });
+}
+function lockDevice(){ setOwner(false); showFab(); closeEditor(); toast('🔒'); }
+
+/* ---------- editor ---------- */
+function openEditor(){ if(!isOwner()) return; buildEditor(); document.getElementById('ovl').classList.add('open'); }
+function closeEditor(){ document.getElementById('ovl').classList.remove('open'); }
+function tab(n,el){
+  document.querySelectorAll('.tabs button').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  document.querySelectorAll('.pane').forEach(function(p,i){ p.classList.toggle('on',i===n); });
+}
+var toastT=null;
+function toast(m,bad){
+  var t=document.getElementById('toast');
+  t.textContent=m; t.classList.toggle('bad',!!bad); t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show');},2600);
+}
+
+function buildEditor(){
+  var h='';
+  (D.groups||[]).forEach(function(g,gi){
+    h+='<div class="fld"><label>'+esc(T(g.t))+'</label>';
+    (g.items||[]).forEach(function(i,ii){
+      h+='<div class="row"><div class="rn"><b>'+esc(i.n)+'</b><small>'+esc(i.url)+'</small></div>'
+        +'<button class="mini" onclick="mv('+gi+','+ii+',-1)">↑</button>'
+        +'<button class="mini" onclick="mv('+gi+','+ii+',1)">↓</button>'
+        +'<button class="mini" onclick="edit('+gi+','+ii+')">✎</button>'
+        +'<button class="mini del" onclick="del('+gi+','+ii+')">🗑</button></div>';
+    });
+    h+='<button class="addbtn" onclick="addItem('+gi+')">'+esc(T(UI.addI))+'</button></div>';
+  });
+  document.getElementById('groupsEdit').innerHTML=h;
+  document.getElementById('fName_i').value=D.name;
+  document.getElementById('fTagEn').value=D.tag.en||'';
+  document.getElementById('fTagAr').value=D.tag.ar||'';
+  var c='';
+  (D.chips||[]).forEach(function(ch,i){
+    c+='<div class="row"><div class="rn"><b>'+esc(ch.l.en)+'</b><small>'+esc(ch.v.en)+'</small></div>'
+      +'<button class="mini" onclick="editChip('+i+')">✎</button>'
+      +'<button class="mini del" onclick="delChip('+i+')">🗑</button></div>';
+  });
+  document.getElementById('chipsEdit').innerHTML=c;
+  updateDirty();
+}
+function commit(){ saveDraft(); render(); buildEditor(); }
+
+var EDIT_AT=null;
+function fillGroupSelect(sel){
+  var s=document.getElementById('iGroup');
+  s.innerHTML=(D.groups||[]).map(function(g,i){ return '<option value="'+i+'">'+esc(T(g.t))+'</option>'; }).join('');
+  s.value=String(sel||0);
+}
+function addItem(gi){
+  EDIT_AT={gi:gi,ii:null};
+  ['iName','iNameAr','iUrl'].forEach(function(k){ document.getElementById(k).value=''; });
+  document.getElementById('iType').value='channel';
+  fillGroupSelect(gi);
+  var f=document.getElementById('itemForm'); f.style.display='block';
+  try{ f.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){}
+}
+function edit(gi,ii){
+  var it=D.groups[gi].items[ii];
+  EDIT_AT={gi:gi,ii:ii};
+  document.getElementById('iName').value=it.n||'';
+  document.getElementById('iNameAr').value=it.nAr||'';
+  document.getElementById('iUrl').value=it.url||'';
+  document.getElementById('iType').value=it.type||'channel';
+  fillGroupSelect(gi);
+  var f=document.getElementById('itemForm'); f.style.display='block';
+  try{ f.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){}
+}
+function itemCancel(){ document.getElementById('itemForm').style.display='none'; EDIT_AT=null; }
+function itemSave(){
+  if(!EDIT_AT) return;
+  var n=document.getElementById('iName').value.trim();
+  var u=safeUrl(document.getElementById('iUrl').value);
+  if(!n||!u){ toast(LANG==='ar'?'أكمل الاسم والرابط':'Fill name and link', true); return; }
+  var obj={n:n,type:document.getElementById('iType').value,url:u,h:u.replace(/^https?:\/\//,'').replace(/\/$/,'')};
+  var ar=document.getElementById('iNameAr').value.trim(); if(ar) obj.nAr=ar;
+  var g=parseInt(document.getElementById('iGroup').value,10)||0;
+  if(EDIT_AT.ii===null) D.groups[g].items.push(obj);
+  else if(g!==EDIT_AT.gi){ D.groups[EDIT_AT.gi].items.splice(EDIT_AT.ii,1); D.groups[g].items.push(obj); }
+  else D.groups[EDIT_AT.gi].items[EDIT_AT.ii]=obj;
+  itemCancel(); commit(); toast(T(UI.savedT));
+}
+function del(gi,ii){ if(!confirm(T(UI.confirmDel))) return; D.groups[gi].items.splice(ii,1); commit(); }
+function mv(gi,ii,d){
+  var a=D.groups[gi].items,j=ii+d; if(j<0||j>=a.length) return;
+  var t=a[ii]; a[ii]=a[j]; a[j]=t; commit();
+}
+
+var CHIP_AT=null;
+function addChip(){ CHIP_AT=null; document.getElementById('cLab').value=''; document.getElementById('cVal').value=''; document.getElementById('chipForm').style.display='block'; }
+function editChip(i){ CHIP_AT=i; document.getElementById('cLab').value=D.chips[i].l.en; document.getElementById('cVal').value=D.chips[i].v.en; document.getElementById('chipForm').style.display='block'; }
+function chipCancel(){ document.getElementById('chipForm').style.display='none'; CHIP_AT=null; }
+function chipSave(){
+  var l=document.getElementById('cLab').value.trim(), v=document.getElementById('cVal').value.trim();
+  if(!l||!v){ toast(LANG==='ar'?'أكمل الحقول':'Fill both fields', true); return; }
+  if(CHIP_AT===null) D.chips.push({l:{en:l,ar:l},v:{en:v,ar:v}});
+  else { D.chips[CHIP_AT].l={en:l,ar:l}; D.chips[CHIP_AT].v={en:v,ar:v}; }
+  chipCancel(); commit(); toast(T(UI.savedT));
+}
+function delChip(i){ if(!confirm(T(UI.confirmDel))) return; D.chips.splice(i,1); commit(); }
+
+function saveAll(){
+  D.name=document.getElementById('fName_i').value.trim()||D.name;
+  D.tag.en=document.getElementById('fTagEn').value.trim();
+  D.tag.ar=document.getElementById('fTagAr').value.trim();
+  commit(); toast(T(UI.savedT));
+}
+function discardDraft(){
+  if(!confirm(T(UI.confirmReset))) return;
+  clearDraft(); D=clone(REMOTE); render(); buildEditor(); toast('✓');
+}
+
+/* ---------- publish ---------- */
+function publishLive(){
+  if(NO_SERVER){ copyData(); return; }
+  var pin=recallPin();
+  if(!pin){ tryUnlock(); return; }
+  var b=document.getElementById('bPublish');
+  b.disabled=true; b.textContent=T(UI.pubbing);
+  api('/api/save',{pin:pin,data:D}).then(function(r){
+    b.textContent=T(UI.publish);
+    if(r.ok){
+      REMOTE=clone(D); clearDraft(); updateDirty();
+      toast(T(UI.pubOk));
+    } else {
+      b.disabled=false;
+      if(r._offline) toast(LANG==='ar'?'لا يوجد اتصال':'No connection', true);
+      else toast(r.error||'Could not publish', true);
+    }
+  });
+}
+function downloadData(){
+  try{
+    var b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(b); a.download='data.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    toast('⬇ data.json');
+  }catch(e){ copyData(); }
+}
+function copyData(){
+  var txt=JSON.stringify(D,null,2);
+  var out=document.getElementById('codeOut');
+  out.style.display='block'; out.value=txt; out.select();
+  try{
+    navigator.clipboard.writeText(txt).then(function(){toast(T(UI.copiedT));},function(){ try{document.execCommand('copy');}catch(_){} toast(T(UI.copiedT)); });
+  }catch(e){ try{ document.execCommand('copy'); toast(T(UI.copiedT)); }catch(_){} }
+}
+
+/* ---------- boot ---------- */
+function valid(d){ return d && typeof d==='object' && Array.isArray(d.groups) && d.tag; }
+function loadRemote(){
+  return fetch('data.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(j){ return valid(j)?j:null; })
+    .catch(function(){ return null; });
+}
+function init(){
+  try{ var s=localStorage.getItem('andro_lang'); if(s) LANG=s; }catch(e){}
+  document.documentElement.lang=LANG;
+  document.documentElement.dir=(LANG==='ar')?'rtl':'ltr';
+  document.getElementById('btn-ar').classList.toggle('on',LANG==='ar');
+  document.getElementById('btn-en').classList.toggle('on',LANG!=='ar');
+
+  loadRemote().then(function(remote){
+    if(remote){ REMOTE=remote; }
+    else { REMOTE=clone(EMBEDDED); NO_SERVER=true; }
+    var draft=readDraft();
+    D = (draft && valid(draft)) ? draft : clone(REMOTE);
+    render(); syncUI(); showFab();
+  });
+
+  document.getElementById('ownerDot').addEventListener('click',function(){ isOwner()?openEditor():tryUnlock(); });
+  var taps=0,tapT=null;
+  document.getElementById('avatar').addEventListener('click',function(){
+    if(isOwner()){ openEditor(); return; }
+    taps++; clearTimeout(tapT); tapT=setTimeout(function(){taps=0;},3000);
+    if(taps>=5){ taps=0; tryUnlock(); }
+  });
+  document.getElementById('pinIn').addEventListener('keydown',function(e){ if(e.key==='Enter') pinSubmit(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ pinClose(); closeEditor(); } });
+}
+init();
+</script>
+</body>
+</html>

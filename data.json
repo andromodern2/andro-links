@@ -1,0 +1,40 @@
+{
+  "name": "ANDRO",
+  "tag": {
+    "en": "Graphic designer & AI creator from Iraq — content maker, channel owner, and a few other things.",
+    "ar": "مصمم جرافيك وصانع محتوى من العراق — أعمل بالذكاء الاصطناعي باحترافية، وأدير قنواتي الخاصة."
+  },
+  "place": { "en": "Iraq", "ar": "العراق" },
+  "trade": { "en": "Graphics · AI · Content", "ar": "جرافيك · ذكاء اصطناعي · محتوى" },
+  "chips": [
+    { "l": { "en": "Location", "ar": "الموقع" }, "v": { "en": "Iraq", "ar": "العراق" } },
+    { "l": { "en": "Age", "ar": "العمر" }, "v": { "en": "20", "ar": "٢٠" } },
+    { "l": { "en": "Design", "ar": "التصميم" }, "v": { "en": "Graphics", "ar": "جرافيك" } },
+    { "l": { "en": "AI", "ar": "الذكاء الاصطناعي" }, "v": { "en": "Professional workflow", "ar": "بأسلوب احترافي" } },
+    { "l": { "en": "Content", "ar": "المحتوى" }, "v": { "en": "Creator", "ar": "صانع محتوى" } }
+  ],
+  "groups": [
+    {
+      "t": { "en": "My channels", "ar": "قنواتي" },
+      "items": [
+        { "n": "ANDRO", "type": "channel", "url": "https://t.me/Andro_M3", "h": "t.me/Andro_M3" },
+        { "n": "ANDRO", "type": "group", "url": "https://t.me/ANDRO_M1", "h": "t.me/ANDRO_M1" },
+        { "n": "ANDRO Store", "type": "bot", "url": "https://t.me/ANDRO_SRTBOT", "h": "@ANDRO_SRTBOT" }
+      ]
+    },
+    {
+      "t": { "en": "Admin in", "ar": "مشرف في" },
+      "items": [
+        { "n": "AMERICAN", "type": "admin", "url": "https://t.me/digitalplus01", "h": "t.me/digitalplus01" },
+        { "n": "BATMAN", "type": "admin", "url": "https://t.me/DarkKnightHub", "h": "t.me/DarkKnightHub" }
+      ]
+    },
+    {
+      "t": { "en": "Find me", "ar": "تواصل معي" },
+      "items": [
+        { "n": "Personal Telegram", "nAr": "تلغرام الشخصي", "type": "channel", "url": "https://t.me/P_S_N_2", "h": "@P_S_N_2" },
+        { "n": "ANDRO", "type": "youtube", "url": "https://www.youtube.com/@Andro-M", "h": "youtube.com/@Andro-M" }
+      ]
+    }
+  ]
+}

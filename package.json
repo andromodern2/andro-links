@@ -1,0 +1,10 @@
+{
+  "name": "andro-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ANDRO — personal links & info site, with a built-in owner editor that publishes itself.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
